@@ -6,6 +6,7 @@ import examen.jorgeleiva.model.Cuadrado;
 import examen.jorgeleiva.model.Rectangulo;
 import examen.jorgeleiva.model.Triangulo;
 
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType; //importar json
 import jakarta.ws.rs.core.Response;
@@ -20,6 +21,7 @@ public class GeometriaResource {
     // Cuadrado - Área
     @POST
     @Path("/area/cuadrado")
+    @Transactional
     public Response calcularAreaCuadrado(@QueryParam("lado") double lado) {
         Cuadrado cuadrado = new Cuadrado(lado);
         double area = cuadrado.calcularArea();
@@ -31,15 +33,19 @@ public class GeometriaResource {
     // Cuadrado - Perímetro
     @POST
     @Path("/perimetro/cuadrado")
+    @Transactional
     public Response calcularPerimetroCuadrado(@QueryParam("lado") double lado) {
         Cuadrado cuadrado = new Cuadrado(lado);
         double perimetro = cuadrado.calcularPerimetro();
+        RegistroOperacion registro = new RegistroOperacion(RegistroOperacion.FiguraGeometrica.CUADRADO, RegistroOperacion.TipoOperacion.PERIMETRO, perimetro);
+        registro.persist();
         return Response.ok(Map.of("data", Map.of("perimetro", perimetro + " u"))).build();
     }
 
     // Círculo - Área
     @POST
     @Path("/area/circulo")
+    @Transactional
     public Response calcularAreaCirculo(@QueryParam("radio") double radio) {
         Circulo circulo = new Circulo(radio);
         double area = circulo.calcularArea();
@@ -51,15 +57,19 @@ public class GeometriaResource {
     // Círculo - Perímetro
     @POST
     @Path("/perimetro/circulo")
+    @Transactional
     public Response calcularPerimetroCirculo(@QueryParam("radio") double radio) {
         Circulo circulo = new Circulo(radio);
         double perimetro = circulo.calcularPerimetro();
+        RegistroOperacion registro = new RegistroOperacion(RegistroOperacion.FiguraGeometrica.CIRCULO, RegistroOperacion.TipoOperacion.PERIMETRO, perimetro);
+        registro.persist();
         return Response.ok(Map.of("data", Map.of("perimetro", perimetro + " u"))).build();
     }
 
     // Rectángulo - Área
     @POST
     @Path("/area/rectangulo")
+    @Transactional
     public Response calcularAreaRectangulo(@QueryParam("largo") double largo, @QueryParam("ancho") double ancho) {
         Rectangulo rectangulo = new Rectangulo(largo, ancho);
         double area = rectangulo.calcularArea();
@@ -71,15 +81,19 @@ public class GeometriaResource {
     // Rectángulo - Perímetro
     @POST
     @Path("/perimetro/rectangulo")
+    @Transactional
     public Response calcularPerimetroRectangulo(@QueryParam("largo") double largo, @QueryParam("ancho") double ancho) {
         Rectangulo rectangulo = new Rectangulo(largo, ancho);
         double perimetro = rectangulo.calcularPerimetro();
+        RegistroOperacion registro = new RegistroOperacion(RegistroOperacion.FiguraGeometrica.RECTANGULO, RegistroOperacion.TipoOperacion.PERIMETRO, perimetro);
+        registro.persist();
         return Response.ok(Map.of("data", Map.of("perimetro", perimetro + " u"))).build();
     }
 
     // Triángulo - Área
     @POST
     @Path("/area/triangulo")
+    @Transactional
     public Response calcularAreaTriangulo(@QueryParam("base") double base, @QueryParam("altura") double altura) {
         Triangulo triangulo = new Triangulo(base, altura, 0, 0, 0); // Los lados no son necesarios para el cálculo del área
         double area = triangulo.calcularArea();
@@ -91,9 +105,12 @@ public class GeometriaResource {
     // Triángulo - Perímetro
     @POST
     @Path("/perimetro/triangulo")
+    @Transactional
     public Response calcularPerimetroTriangulo(@QueryParam("ladoA") double ladoA, @QueryParam("ladoB") double ladoB, @QueryParam("ladoC") double ladoC) {
         Triangulo triangulo = new Triangulo(0, 0, ladoA, ladoB, ladoC); // La base y altura no son necesarios para el cálculo del perímetro
         double perimetro = triangulo.calcularPerimetro();
+        RegistroOperacion registro = new RegistroOperacion(RegistroOperacion.FiguraGeometrica.TRIANGULO, RegistroOperacion.TipoOperacion.PERIMETRO, perimetro);
+        registro.persist();
         return Response.ok(Map.of("data", Map.of("perimetro", perimetro + " u"))).build();
     }
 }

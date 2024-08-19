@@ -25,12 +25,12 @@ public class RegistroOperacion extends PanacheEntity {
     @Enumerated(EnumType.STRING)
     public FiguraGeometrica figura;
 
-    @Enumerated(EnumType.STRING)
+   @Enumerated(EnumType.STRING)
     public TipoOperacion operacion;
 
     public double resultado;
 
-    public LocalDateTime fechaHora;
+    //public LocalDateTime fechaHora;
 
     public RegistroOperacion() {
         // Constructor por defecto
@@ -40,7 +40,7 @@ public class RegistroOperacion extends PanacheEntity {
         this.figura = figura;
         this.operacion = operacion;
         this.resultado = resultado;
-        this.fechaHora = LocalDateTime.now();
+        //this.fechaHora = LocalDateTime.now();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class RegistroOperacion extends PanacheEntity {
                 ", figura=" + figura +
                 ", operacion=" + operacion +
                 ", resultado=" + resultado +
-                ", fechaHora=" + fechaHora +
+                //", fechaHora=" + fechaHora +
                 '}';
     }
 }
