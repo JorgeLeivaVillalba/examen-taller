@@ -4,11 +4,8 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "registro_operacion")
@@ -30,7 +27,6 @@ public class RegistroOperacion extends PanacheEntity {
 
     public double resultado;
 
-    //public LocalDateTime fechaHora;
 
     public RegistroOperacion() {
         // Constructor por defecto
@@ -40,17 +36,5 @@ public class RegistroOperacion extends PanacheEntity {
         this.figura = figura;
         this.operacion = operacion;
         this.resultado = resultado;
-        //this.fechaHora = LocalDateTime.now();
-    }
-
-    @Override
-    public String toString() {
-        return "RegistroOperacion{" +
-                "id=" + id +
-                ", figura=" + figura +
-                ", operacion=" + operacion +
-                ", resultado=" + resultado +
-                //", fechaHora=" + fechaHora +
-                '}';
     }
 }

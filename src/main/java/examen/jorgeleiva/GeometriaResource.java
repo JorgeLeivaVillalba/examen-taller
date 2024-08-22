@@ -27,21 +27,21 @@ import java.util.Map;
         info = @Info(
                 title = "API de Cálculos Geométricos",
                 version = "1.0.0",
-                contact = @Contact(name = "Jorge Leiva", email = "jorgeleiva@example.com")
+                contact = @Contact(name = "Jorge Leiva", email = "jorgeleiva.994@gmail.com")
         )
 )
 @Path("/geometria")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-@Tag(name = "Geometría", description = "Operaciones de área y perímetro para figuras geométricas")
+@Produces(MediaType.APPLICATION_JSON) // Exportar JSON
+@Consumes(MediaType.APPLICATION_JSON) // Leer JSON
+@Tag(name = "Geometría ", description = "  API para realizar operaciones de área y perímetro para figuras geométricas")
 public class GeometriaResource {
 
     // Cuadrado - Área
     @POST
-    @Path("/area/cuadrado")
-    @Transactional
-    @Operation(summary = "Calcular el área de un cuadrado", description = "Devuelve el área de un cuadrado dado su lado.")
-    @Parameter(name = "lado", description = "El lado del cuadrado", required = true)
+    @Path("/area/cuadrado") //Ruta
+    @Transactional //Transaccion para modificar BD con JPA
+    @Operation(summary = "Calcula el área de un cuadrado", description = "Devuelve el área de un cuadrado, dado su lado.") //Doc Swagger - Titulo
+    @Parameter(name = "Lado", description = "El lado del cuadrado", required = true) // Doc - Parametros
     @APIResponse(
             responseCode = "200",
             description = "Área calculada con éxito",
@@ -60,8 +60,8 @@ public class GeometriaResource {
     @POST
     @Path("/perimetro/cuadrado")
     @Transactional
-    @Operation(summary = "Calcular el perímetro de un cuadrado", description = "Devuelve el perímetro de un cuadrado dado su lado.")
-    @Parameter(name = "lado", description = "El lado del cuadrado", required = true)
+    @Operation(summary = "Calcula el perímetro de un cuadrado", description = "Devuelve el perímetro de un cuadrado, dado su lado.")
+    @Parameter(name = "Lado", description = "El lado del cuadrado", required = true)
     @APIResponse(
             responseCode = "200",
             description = "Perímetro calculado con éxito",
@@ -80,8 +80,8 @@ public class GeometriaResource {
     @POST
     @Path("/area/circulo")
     @Transactional
-    @Operation(summary = "Calcular el área de un círculo", description = "Devuelve el área de un círculo dado su radio.")
-    @Parameter(name = "radio", description = "El radio del círculo", required = true)
+    @Operation(summary = "Calcula el área de un círculo", description = "Devuelve el área de un círculo, dado su radio.")
+    @Parameter(name = "Radio", description = "El radio del círculo", required = true)
     @APIResponse(
             responseCode = "200",
             description = "Área calculada con éxito",
@@ -98,13 +98,13 @@ public class GeometriaResource {
 
     // Círculo - Perímetro
     @POST
-    @Path("/perimetro/circulo")
+    @Path("/circunferencia/circulo")
     @Transactional
-    @Operation(summary = "Calcular el perímetro de un círculo", description = "Devuelve el perímetro de un círculo dado su radio.")
-    @Parameter(name = "radio", description = "El radio del círculo", required = true)
+    @Operation(summary = "Calcula la circunferencia de un círculo", description = "Devuelve la circunferencia de un círculo, dado su radio.")
+    @Parameter(name = "Radio", description = "El radio del círculo", required = true)
     @APIResponse(
             responseCode = "200",
-            description = "Perímetro calculado con éxito",
+            description = "Circunferencia calculada con éxito",
             content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = Double.class))
     )
     @APIResponse(responseCode = "400", description = "Solicitud inválida")
@@ -120,9 +120,9 @@ public class GeometriaResource {
     @POST
     @Path("/area/rectangulo")
     @Transactional
-    @Operation(summary = "Calcular el área de un rectángulo", description = "Devuelve el área de un rectángulo dado su largo y ancho.")
-    @Parameter(name = "largo", description = "El largo del rectángulo", required = true)
-    @Parameter(name = "ancho", description = "El ancho del rectángulo", required = true)
+    @Operation(summary = "Calcula el área de un rectángulo", description = "Devuelve el área de un rectángulo, dado su largo y ancho.")
+    @Parameter(name = "Largo", description = "El largo del rectángulo", required = true)
+    @Parameter(name = "Ancho", description = "El ancho del rectángulo", required = true)
     @APIResponse(
             responseCode = "200",
             description = "Área calculada con éxito",
@@ -141,9 +141,9 @@ public class GeometriaResource {
     @POST
     @Path("/perimetro/rectangulo")
     @Transactional
-    @Operation(summary = "Calcular el perímetro de un rectángulo", description = "Devuelve el perímetro de un rectángulo dado su largo y ancho.")
-    @Parameter(name = "largo", description = "El largo del rectángulo", required = true)
-    @Parameter(name = "ancho", description = "El ancho del rectángulo", required = true)
+    @Operation(summary = "Calcula el perímetro de un rectángulo", description = "Devuelve el perímetro de un rectángulo, dado su largo y ancho.")
+    @Parameter(name = "Largo", description = "El largo del rectángulo", required = true)
+    @Parameter(name = "Ancho", description = "El ancho del rectángulo", required = true)
     @APIResponse(
             responseCode = "200",
             description = "Perímetro calculado con éxito",
@@ -162,9 +162,9 @@ public class GeometriaResource {
     @POST
     @Path("/area/triangulo")
     @Transactional
-    @Operation(summary = "Calcular el área de un triángulo", description = "Devuelve el área de un triángulo dado su base y altura.")
-    @Parameter(name = "base", description = "La base del triángulo", required = true)
-    @Parameter(name = "altura", description = "La altura del triángulo", required = true)
+    @Operation(summary = "Calcula el área de un triángulo", description = "Devuelve el área de un triángulo, dado su base y altura.")
+    @Parameter(name = "Base", description = "La base del triángulo", required = true)
+    @Parameter(name = "Altura", description = "La altura del triángulo", required = true)
     @APIResponse(
             responseCode = "200",
             description = "Área calculada con éxito",
@@ -183,10 +183,10 @@ public class GeometriaResource {
     @POST
     @Path("/perimetro/triangulo")
     @Transactional
-    @Operation(summary = "Calcular el perímetro de un triángulo", description = "Devuelve el perímetro de un triángulo dado sus tres lados.")
-    @Parameter(name = "ladoA", description = "El lado A del triángulo", required = true)
-    @Parameter(name = "ladoB", description = "El lado B del triángulo", required = true)
-    @Parameter(name = "ladoC", description = "El lado C del triángulo", required = true)
+    @Operation(summary = "Calcula el perímetro de un triángulo", description = "Devuelve el perímetro de un triángulo, dado sus tres lados.")
+    @Parameter(name = "Lado A", description = "El lado A del triángulo", required = true)
+    @Parameter(name = "Lado B", description = "El lado B del triángulo", required = true)
+    @Parameter(name = "Lado C", description = "El lado C del triángulo", required = true)
     @APIResponse(
             responseCode = "200",
             description = "Perímetro calculado con éxito",
@@ -202,5 +202,4 @@ public class GeometriaResource {
     }
 }
 
-/*Los parámetros para las solicitudes HTTP se reciben a través de @QueryParam, lo cual permite que los datos de entrada se proporcionen como parámetros en la URL.
-La respuesta sigue el formato JSON esperado, con la clave "data" y el valor correspondiente al resultado calculado, ya sea área o perímetro.*/
+/*Los parámetros para las solicitudes HTTP se reciben a través de @QueryParam, lo cual permite que los datos de entrada se proporcionen como parámetros en la URL.*/
