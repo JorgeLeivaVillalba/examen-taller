@@ -23,7 +23,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.util.Map;
 
-@OpenAPIDefinition(
+@OpenAPIDefinition(     //Define la información general de la API
         info = @Info(
                 title = "API de Cálculos Geométricos",
                 version = "1.0.0",
@@ -33,7 +33,7 @@ import java.util.Map;
 @Path("/geometria")
 @Produces(MediaType.APPLICATION_JSON) // Exportar JSON
 @Consumes(MediaType.APPLICATION_JSON) // Leer JSON
-@Tag(name = "Geometría ", description = "  API para realizar operaciones de área y perímetro para figuras geométricas")
+@Tag(name = "Geometría ", description = "  API para realizar operaciones de área y perímetro para figuras geométricas") //Etiqueta usada para agrupar y describir endpoints
 public class GeometriaResource {
 
     // Cuadrado - Área
@@ -41,19 +41,19 @@ public class GeometriaResource {
     @Path("/area/cuadrado") //Ruta
     @Transactional //Transaccion para modificar BD con JPA
     @Operation(summary = "Calcula el área de un cuadrado", description = "Devuelve el área de un cuadrado, dado su lado.") //Doc Swagger - Titulo
-    @Parameter(name = "Lado", description = "El lado del cuadrado", required = true) // Doc - Parametros
-    @APIResponse(
+    @Parameter(name = "Lado", description = "El lado del cuadrado", required = true) // Doc - Parametros de entrada
+    @APIResponse( //respuesta API
             responseCode = "200",
             description = "Área calculada con éxito",
             content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = Double.class))
     )
     @APIResponse(responseCode = "400", description = "Solicitud inválida")
-    public Response calcularAreaCuadrado(@QueryParam("lado") double lado) {
+    public Response calcularAreaCuadrado(@QueryParam("lado") double lado) { // @QueryParam para pasar el valor en la URL
         Cuadrado cuadrado = new Cuadrado(lado);
         double area = cuadrado.calcularArea();
         RegistroOperacion registro = new RegistroOperacion(RegistroOperacion.FiguraGeometrica.CUADRADO, RegistroOperacion.TipoOperacion.AREA, area);
-        registro.persist();
-        return Response.ok(Map.of("data", Map.of("area", area + " u2"))).build();
+        registro.persist(); //sql
+        return Response.ok(Map.of("data", Map.of("area", area + " u2"))).build(); //Respuesta en la consola
     }
 
     // Cuadrado - Perímetro
